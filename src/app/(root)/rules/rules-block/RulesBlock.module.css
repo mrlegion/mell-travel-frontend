@@ -1,0 +1,16 @@
+.rules_block_title {
+    font-size:1.8rem;
+    margin-bottom:1.5rem;
+}
+
+.rules_block_item_title {
+    font-weight:700;
+    margin-bottom:.35rem;
+}
+
+.rules_block_item_subtitle {
+    font-size:.88rem;
+    color:var(--gray-dark);
+    margin:0;
+}
+

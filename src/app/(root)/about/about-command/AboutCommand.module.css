@@ -1,0 +1,17 @@
+.about_command {
+    background:linear-gradient(135deg,var(--sage-dark),#3a6a2a);
+}
+
+.about_command_title {
+    font-family:'Playfair Display',serif;
+    color:white;
+    font-size:2.2rem;
+    margin-bottom:1rem;
+}
+
+.about_command_subtitle {
+    color:rgba(255,255,255,.75);
+    font-size:1rem;
+    max-width:480px;
+    margin:0 auto 2rem;
+}

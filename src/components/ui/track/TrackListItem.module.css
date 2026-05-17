@@ -1,0 +1,106 @@
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.avatar-fallback {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    flex-shrink: 0;
+    background-color: #4a6cf7; /* Цвет по умолчанию */
+}
+
+.avatar-fallback.a {
+    background-color: #ff6b6b;
+}
+.avatar-fallback.b {
+    background-color: #4ecdc4;
+}
+.avatar-fallback.c {
+    background-color: #45b7d1;
+}
+.avatar-fallback.d {
+    background-color: #96ceb4;
+}
+.avatar-fallback.e {
+    background-color: #feca57;
+}
+.avatar-fallback.f {
+    background-color: #ff9ff3;
+}
+.avatar-fallback.g {
+    background-color: #54a0ff;
+}
+.avatar-fallback.h {
+    background-color: #5f27cd;
+}
+.avatar-fallback.i {
+    background-color: #00d2d3;
+}
+.avatar-fallback.j {
+    background-color: #ff9f43;
+}
+.avatar-fallback.k {
+    background-color: #10ac84;
+}
+.avatar-fallback.l {
+    background-color: #ee5a24;
+}
+.avatar-fallback.m {
+    background-color: #0abde3;
+}
+.avatar-fallback.n {
+    background-color: #3867d6;
+}
+.avatar-fallback.o {
+    background-color: #8854d0;
+}
+.avatar-fallback.p {
+    background-color: #4b6584;
+}
+.avatar-fallback.q {
+    background-color: #20bf6b;
+}
+.avatar-fallback.r {
+    background-color: #0fb9b1;
+}
+.avatar-fallback.s {
+    background-color: #f78fb3;
+}
+.avatar-fallback.t {
+    background-color: #f8a5c2;
+}
+.avatar-fallback.u {
+    background-color: #63cdda;
+}
+.avatar-fallback.v {
+    background-color: #ea8685;
+}
+.avatar-fallback.w {
+    background-color: #596275;
+}
+.avatar-fallback.x {
+    background-color: #30336b;
+}
+.avatar-fallback.y {
+    background-color: #e056fd;
+}
+.avatar-fallback.z {
+    background-color: #6d214f;
+}

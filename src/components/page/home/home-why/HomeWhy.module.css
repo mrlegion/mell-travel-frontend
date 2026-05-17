@@ -1,0 +1,9 @@
+.home_why_item_title {
+    font-family:'Playfair Display',serif;
+    margin-bottom:.75rem;
+}
+
+.home_why_item_text {
+    font-size:.9rem;
+    color:var(--gray-dark);
+}

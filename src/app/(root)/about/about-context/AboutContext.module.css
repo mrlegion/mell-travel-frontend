@@ -1,0 +1,30 @@
+.about_context_card {
+    border-radius:var(--radius);
+    padding:1.75rem;
+    height:100%;
+}
+
+.about_context_card_icon {
+    font-size:1.6rem;
+    margin-bottom:.75rem;
+}
+
+.about_context_card_title {
+    font-weight:700;
+    font-family:'Playfair Display',serif;
+    margin-bottom:.5rem;
+}
+
+.about_context_card_text {
+    font-size:.85rem;
+    color:var(--gray-dark);
+    margin:0;
+}
+
+.about_context_text {
+    font-size:1rem;
+    color:var(--gray-dark);
+    line-height:1.85;
+    margin-bottom:1.25rem;
+}
+

@@ -1,0 +1,41 @@
+.about_hero_key_value {
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    color:white;
+    font-weight:700;
+}
+
+.about_hero_key_text {
+    font-size:.82rem;
+    color:rgba(255,255,255,.6);
+}
+
+.about_hero_key {
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:var(--radius);
+    padding:2rem;
+    backdrop-filter:blur(8px);
+}
+
+.about_hero_key_title {
+    font-size:.78rem;
+    color:var(--sage-light);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    margin-bottom:1.5rem
+}
+
+.about_hero_left_title {
+    font-size:clamp(2rem,5vw,3.5rem);
+    color:white;
+    margin-bottom:1.25rem;
+}
+
+.about_hero_left_subtitle {
+    font-size:1.1rem;
+    color:rgba(255,255,255,.75);
+    line-height:1.8;
+    max-width:540px;
+}

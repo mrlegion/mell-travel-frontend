@@ -1,0 +1,47 @@
+.contacts {
+  &_hero {
+
+    &_up_icon {
+      background:rgba(255,255,255,.12);
+      border-radius:50px;
+      padding:6px 18px;
+      font-size:.82rem;
+      color:rgba(255,255,255,.85);
+    }
+
+    &_title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,5vw,3rem);
+      color:white;
+      margin-bottom:1rem;
+    }
+
+    &_subtitle {
+      color:rgba(255,255,255,.7);
+      font-size:1.05rem;
+      max-width:500px;
+      margin:0 auto;
+    }
+
+  }
+
+  &_info_card {
+    &_title {
+      font-weight:700;
+      font-family:'Playfair Display',serif;
+      margin-bottom:.5rem;
+    }
+
+    &_subtitle {
+      font-size:.88rem;
+      color:var(--gray-dark);
+      margin-bottom:.75rem;
+    }
+
+    &_link {
+      color:var(--sage-dark);
+      font-weight:600;
+      font-size:.9rem;
+    }
+  }
+}
