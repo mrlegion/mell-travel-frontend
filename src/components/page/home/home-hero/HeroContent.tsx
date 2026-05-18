@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { FaLocationDot } from 'react-icons/fa6'
 
 import { PUBLIC_URL } from '@/config/url.config'

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import React from 'react'
 
-import { FilterProvider } from '@/app/filter.provider'
 import { Providers } from '@/app/providers'
 
 import '../shared/css/bootstrap.min.css'
@@ -43,9 +42,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className={`antialiased`}>
-				<Providers>
-					<FilterProvider>{children}</FilterProvider>
-				</Providers>
+				<Providers>{children}</Providers>
 				<Script src='/js/script.js' strategy='afterInteractive' />
 			</body>
 		</html>

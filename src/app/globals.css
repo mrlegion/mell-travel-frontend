@@ -1380,3 +1380,57 @@ img {
 .avatar-fallback.z {
   background-color: #6d214f;
 }
+
+.login-container {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+}
+
+.register-container {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--charcoal);
+}
+
+.form-title {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--charcoal);
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-mid);
+}
+
+.switch-form a {
+  color: var(--sage-dark);
+  font-weight: 500;
+}

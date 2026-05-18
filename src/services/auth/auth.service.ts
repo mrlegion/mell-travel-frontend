@@ -1,4 +1,4 @@
-import { axiosClassic } from '@/api/api.interceptors'
+import { axiosClassic, axiosWithAuth } from '@/api/api.interceptors'
 
 import { API_URL } from '@/config/api.config'
 
@@ -14,10 +14,12 @@ class AuthService {
 	// ============================================================
 	public async main(type: TAuthType, data: IAuthForm) {
 		const response = await axiosClassic<IAuthResponse>({
-			url: API_URL.auth(`${type}`),
+			url: API_URL.auth(`/${type}`),
 			method: 'POST',
 			data
 		})
+
+		console.log(response)
 
 		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
@@ -42,7 +44,7 @@ class AuthService {
 	//   Выход из системы
 	// ============================================================
 	public async logout() {
-		const response = await axiosClassic<IAuthLogout>({
+		const response = await axiosWithAuth<IAuthLogout>({
 			url: API_URL.auth('/logout'),
 			method: 'POST'
 		})

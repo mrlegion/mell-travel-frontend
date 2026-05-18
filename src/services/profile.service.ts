@@ -21,6 +21,7 @@ class ProfileService {
 	//   Обновление данных текущего пользователя
 	// ============================================================
 	public async update(data: IUserUpdate) {
+		console.log(data)
 		const { data: response } = await axiosWithAuth<IUserUpdateResponse>({
 			url: API_URL.profile(),
 			method: 'PATCH',

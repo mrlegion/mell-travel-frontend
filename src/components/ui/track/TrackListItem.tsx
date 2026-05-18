@@ -1,4 +1,7 @@
+import { useRouter } from 'next/navigation'
 import { FaHeart } from 'react-icons/fa6'
+
+import { PUBLIC_URL } from '@/config/url.config'
 
 import { ITrackView } from '@/shared/types/track.interface'
 import { getAvatarColorSimple } from '@/shared/utils/translate'
@@ -10,6 +13,8 @@ interface TrackListItemProps {
 }
 
 export function TrackListItem({ track }: TrackListItemProps) {
+	const router = useRouter()
+
 	const image =
 		track.images.length > 0 ? track.images[0] : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
 
@@ -21,6 +26,7 @@ export function TrackListItem({ track }: TrackListItemProps) {
 				paddingRight: '0 ',
 				paddingLeft: '0 '
 			}}
+			onClick={() => router.push(PUBLIC_URL.track(track.id))}
 		>
 			<div className='card-img-wrap'>
 				<img src={image} alt={track.title} loading='lazy' />
@@ -42,14 +48,16 @@ export function TrackListItem({ track }: TrackListItemProps) {
 				</div>
 				<div className='card-meta'>
 					<div className='author' style={{ cursor: 'pointer' }}>
-						{
+						{track.account.avatar ? (
+							<img className='avatar-sm' src={track.account.avatar} alt={track.account.name} />
+						) : (
 							<div
 								className='avatar-fallback'
 								style={{ backgroundColor: getAvatarColorSimple(track.account.name) }}
 							>
 								{track.account.name?.[0]?.toUpperCase() || '?'}
 							</div>
-						}
+						)}
 						<span>{track.account.name}</span>
 					</div>
 					<div>♥ {track.likes}</div>

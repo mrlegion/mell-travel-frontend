@@ -84,7 +84,7 @@ class TrackService {
 	// ============================================================
 	public async getMyTrack() {
 		const { data } = await axiosWithAuth<ITrack[]>({
-			url: API_URL.tracks('my-track'),
+			url: API_URL.tracks('/my-track'),
 			method: 'GET'
 		})
 

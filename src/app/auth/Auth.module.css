@@ -1,0 +1,8 @@
+.auth_body {
+    background: linear-gradient(135deg, #1a2f1a 0%, #2d4a2d 40%, #3a5f3a 70%, #2c4a5a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
