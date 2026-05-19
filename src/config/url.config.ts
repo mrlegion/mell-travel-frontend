@@ -13,7 +13,8 @@ export const PUBLIC_URL = {
 	about: () => PUBLIC_URL.root('/about'),
 	rules: () => PUBLIC_URL.root('/rules'),
 	contacts: () => PUBLIC_URL.root('/contacts'),
-	profile: () => PUBLIC_URL.root('/profile')
+	profile: () => PUBLIC_URL.root(`/profile`),
+	user: (id = '') => PUBLIC_URL.root(`/profile/${id}`)
 }
 
 export const PROFILE_URL = {

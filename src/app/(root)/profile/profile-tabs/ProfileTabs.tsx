@@ -1,8 +1,9 @@
+'use client'
+
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
-import { ProfileHero } from '@/app/(root)/profile/profile-hero/ProfileHero'
 import { TabFavoriteTrack } from '@/app/(root)/profile/profile-tabs/TabFavoriteTrack'
 import { TabMyTrack } from '@/app/(root)/profile/profile-tabs/TabMyTrack'
 import { TabSettings } from '@/app/(root)/profile/profile-tabs/TabSettings'

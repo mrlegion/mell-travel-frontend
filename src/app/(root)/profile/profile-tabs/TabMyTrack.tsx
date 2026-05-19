@@ -12,20 +12,26 @@ import style from '../Profile.module.scss'
 interface TabMyTrackProps {
 	tracks: ITrack[]
 	active: 'my' | 'favorites' | 'settings'
+	title?: string
+	showCreateBtn?: boolean
 }
 
-export function TabMyTrack({ tracks, active }: TabMyTrackProps) {
+export function TabMyTrack({ tracks, active, title = 'Мои маршруты', showCreateBtn = true }: TabMyTrackProps) {
 	return (
 		<div id='pane-posts' className='tab-pane' style={{ display: `${active === 'my' ? 'block' : 'none'}` }}>
 			<div className='d-flex justify-content-between align-items-center mb-4'>
-				<h5 className={style.profile_tabs_title}>Мои маршруты</h5>
-				<Link
-					href={PUBLIC_URL.createTrack()}
-					className={`btn-primary-green ${style.profile_tabs_btn}`}
-					style={{ display: `${active === 'my' ? 'inline-flex' : 'none'}` }}
-				>
-					<FaPlus /> Новый отчёт
-				</Link>
+				<h5 className={style.profile_tabs_title}>{title}</h5>
+				{showCreateBtn ? (
+					<Link
+						href={PUBLIC_URL.createTrack()}
+						className={`btn-primary-green ${style.profile_tabs_btn}`}
+						style={{ display: `${active === 'my' ? 'inline-flex' : 'none'}` }}
+					>
+						<FaPlus /> Новый отчёт
+					</Link>
+				) : (
+					''
+				)}
 			</div>
 			<div className='row g-4' id='myPosts'>
 				{tracks.length > 0 ? (

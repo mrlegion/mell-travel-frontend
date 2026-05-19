@@ -5,9 +5,17 @@ export interface IFavorite {
 	track: ITrackView
 }
 
+export interface IFavoriteUser {
+	user: string
+	tracks: ITrackView[]
+}
+
 export type TFavoriteOperation = 'add' | 'remove'
 
-export interface IFavoriteChange {
+export interface IFavoriteToggle {
 	trackId: string
-	operation: TFavoriteOperation
+}
+
+export interface IFavoriteToggleResponse {
+	success: boolean
 }

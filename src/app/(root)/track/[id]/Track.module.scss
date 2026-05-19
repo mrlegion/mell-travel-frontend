@@ -1,0 +1,87 @@
+.track {
+  &_hero {
+    &_region {
+      color:var(--sage-light);
+      font-size:.85rem;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    &_title {
+      font-size:clamp(1.6rem,4vw,3rem);
+      color:white;
+      max-width:800px;
+      margin-bottom:1rem;
+    }
+
+    &_info {
+      color:rgba(255,255,255,.75);
+      font-size:.88rem;
+    }
+  }
+
+  &_content {
+    &_body {
+      font-size:1.08rem;
+      line-height:1.9;
+      color:var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    &_title {
+      font-family:'Playfair Display',serif;
+      margin:2.5rem 0 1rem;
+    }
+
+    &_btn {
+      padding:.65rem 1.5rem;
+      font-size:.9rem;
+    }
+  }
+
+  &_info {
+    background:var(--off-white);
+    border-radius:var(--radius);
+    padding:1.75rem;
+    border:1px solid var(--gray-pale);
+    position:sticky;top:90px;
+
+    &_title {
+      font-weight:700;
+      font-size:1rem;
+      margin-bottom:1.25rem;
+      font-family:'Playfair Display',serif;
+    }
+
+    &_label {
+      font-size:.88rem;
+      color:var(--gray-dark);
+    }
+  }
+
+  &_comment {
+    &_avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sage-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sage-dark);
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    &_title {
+      font-weight:600;
+      font-size:.9rem;
+    }
+
+    &_text {
+      font-size:.92rem;
+      margin:0;
+    }
+  }
+}

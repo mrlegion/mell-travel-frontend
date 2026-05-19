@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { ProfileHero } from '@/app/(root)/profile/profile-hero/ProfileHero'
 import { ProfileTabs } from '@/app/(root)/profile/profile-tabs/ProfileTabs'
 

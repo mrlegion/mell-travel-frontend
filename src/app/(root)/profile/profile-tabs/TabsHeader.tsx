@@ -1,9 +1,10 @@
 interface TabsHeaderProps {
 	activeTab: 'my' | 'favorites' | 'settings'
 	onClick: (name: 'my' | 'favorites' | 'settings') => void
+	withoutSettings?: boolean
 }
 
-export function TabsHeader({ onClick, activeTab }: TabsHeaderProps) {
+export function TabsHeader({ onClick, activeTab, withoutSettings = false }: TabsHeaderProps) {
 	const getTabClassName = (tabName: 'my' | 'favorites' | 'settings') => {
 		return `profile-tab ${activeTab === tabName ? 'active' : ''}`
 	}
@@ -20,9 +21,17 @@ export function TabsHeader({ onClick, activeTab }: TabsHeaderProps) {
 			>
 				Избранное
 			</span>
-			<span className={getTabClassName('settings')} data-tab='pane-settings' onClick={() => onClick('settings')}>
-				Настройки
-			</span>
+			{withoutSettings ? (
+				''
+			) : (
+				<span
+					className={getTabClassName('settings')}
+					data-tab='pane-settings'
+					onClick={() => onClick('settings')}
+				>
+					Настройки
+				</span>
+			)}
 		</div>
 	)
 }

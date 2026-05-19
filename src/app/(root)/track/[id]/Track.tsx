@@ -2,6 +2,9 @@
 
 import { useQuery } from '@tanstack/react-query'
 
+import { TrackContent } from '@/app/(root)/track/[id]/track-content/TrackContent'
+import { TrackHero } from '@/app/(root)/track/[id]/track-hero/TrackHero'
+
 import { trackService } from '@/services/track.service'
 
 import { ITrack } from '@/shared/types/track.interface'
@@ -20,14 +23,16 @@ export function Track({ initialTrack, id = '' }: TrackProps) {
 	})
 
 	return (
-		<div>
-			<h2>This is track page</h2>
-			<h4>
-				track: {track.id}, {track.title}
-			</h4>
-			{track.images.map((image, key) => (
-				<img src={image} alt='123' key={key} style={{ width: '1024px', height: '500px', objectFit: 'cover' }} />
-			))}
-		</div>
+		<>
+			<TrackHero
+				region={track.region}
+				title={track.title}
+				author={track.account.name}
+				authorId={track.account.id}
+				createdAt={track.createdAt}
+				image={track.images[0]}
+			/>
+			<TrackContent track={track} />
+		</>
 	)
 }

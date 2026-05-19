@@ -11,7 +11,8 @@ export interface IUser {
 	notificationLikes: boolean
 	notificationNewTrackInFavorites: boolean
 	tracks: ITrackView[]
-	favorites: IFavorite[]
+	favorites: string[]
+	likes: string[]
 }
 
 export interface IUserUpdate extends Omit<IUser, 'id' | 'email' | 'tracks' | 'favorites'> {}

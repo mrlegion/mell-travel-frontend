@@ -1,6 +1,11 @@
 'use client'
 
+import Link from 'next/link'
+import { FaArrowRight } from 'react-icons/fa6'
+
 import { TrackListItem } from '@/components/ui'
+
+import { PUBLIC_URL } from '@/config/url.config'
 
 import { useGetMostPopularTrack } from '@/hooks/queries/tracks/useGetMostPopularTrack'
 
@@ -20,9 +25,9 @@ export function HomePopular() {
 						</p>
 					</div>
 					<div className='col-auto'>
-						<a href='feed.html' className='btn-outline-green'>
-							Все публикации <i className='fa-solid fa-arrow-right'></i>
-						</a>
+						<Link href={PUBLIC_URL.feed()} className='btn-outline-green'>
+							Все публикации <FaArrowRight />
+						</Link>
 					</div>
 				</div>
 				<div className='row g-4' id='featuredPosts'>
