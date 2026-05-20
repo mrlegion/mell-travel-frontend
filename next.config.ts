@@ -32,7 +32,8 @@ const nextConfig: NextConfig = {
 				destination: `${process.env.SERVER_URL}/uploads/:path*`
 			}
 		]
-	}
+	},
+	allowedDevOrigins: ['192.168.1.160']
 }
 
 export default nextConfig

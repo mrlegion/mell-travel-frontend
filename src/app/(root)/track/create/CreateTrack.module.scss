@@ -1,0 +1,25 @@
+.create_track {
+  &_hero {
+    background:linear-gradient(135deg,var(--sage-dark),#4a7a3a);
+    padding:3rem 0 2rem;
+    color:white;
+
+    &_link {
+      color:rgba(255,255,255,.65);
+      font-size:.85rem;
+      margin-bottom:1rem;
+      display:inline-block;
+    }
+
+    &_title {
+      font-family:'Playfair Display',serif;
+      font-size:2rem;
+      margin-bottom:.4rem;
+    }
+
+    &_text {
+      color:rgba(255,255,255,.7);
+      font-size:.95rem;
+    }
+  }
+}

@@ -16,8 +16,8 @@ export const useCreateComments = (trackId: string) => {
 
 			toast.success('Комментарий добавлен')
 		},
-		onError() {
-			toast.error('Ошибка при добавлении комментария')
+		onError(error: any) {
+			toast.error(error?.response?.data?.message || 'Ошибка при добавлении комментария')
 		}
 	})
 

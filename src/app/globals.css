@@ -1542,3 +1542,12 @@ img {
 .leaflet-right .leaflet-control {
   margin-right: 10px;
 }
+
+.create_track_indicators > span.active {
+  color: var(--sage-dark);
+}
+
+.create_track_indicators > span.done {
+  color: var(--sage-dark);
+  font-weight: bold;
+}
