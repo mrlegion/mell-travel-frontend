@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
@@ -30,6 +30,9 @@ type TTab = 'my' | 'favorites' | 'settings'
 
 export function ProfileTabs({ myTracks, favorites, settings }: ProfileTabsProps) {
 	const [tab, setTab] = useState<TTab>('my')
+
+	const queryClient = useQueryClient()
+
 	const [setting, setSettings] = useState({
 		name: settings?.name || '',
 		bio: settings?.bio || '',
@@ -51,6 +54,9 @@ export function ProfileTabs({ myTracks, favorites, settings }: ProfileTabsProps)
 				avatar: updatedData.avatar
 			}),
 		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ['profile']
+			})
 			toast.success('Данные успешно обновлены')
 		},
 		onError: (error: any) => {

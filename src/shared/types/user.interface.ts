@@ -15,7 +15,7 @@ export interface IUser {
 	likes: string[]
 }
 
-export interface IUserUpdate extends Omit<IUser, 'id' | 'email' | 'tracks' | 'favorites'> {}
+export interface IUserUpdate extends Omit<IUser, 'id' | 'email' | 'tracks' | 'favorites' | 'likes'> {}
 
 export interface IAuthor extends Pick<IUser, 'id' | 'name' | 'email' | 'avatar'> {}
 
