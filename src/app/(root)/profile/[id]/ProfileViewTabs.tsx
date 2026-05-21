@@ -6,11 +6,11 @@ import { TabFavoriteTrack } from '@/app/(root)/profile/profile-tabs/TabFavoriteT
 import { TabMyTrack } from '@/app/(root)/profile/profile-tabs/TabMyTrack'
 import { TabsHeader } from '@/app/(root)/profile/profile-tabs/TabsHeader'
 
-import { ITrack } from '@/shared/types/track.interface'
+import { ITrack, ITrackView } from '@/shared/types/track.interface'
 
 interface ProfileViewTabsProps {
 	tracks: ITrack[]
-	favorites: ITrack[]
+	favorites: ITrackView[] | undefined
 }
 
 type TTab = 'my' | 'favorites' | 'settings'
