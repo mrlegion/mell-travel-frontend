@@ -1,11 +1,11 @@
 import { TrackListItem } from '@/components/ui'
 
-import { ITrack } from '@/shared/types/track.interface'
+import { ITrack, ITrackView } from '@/shared/types/track.interface'
 
 import style from '../Profile.module.scss'
 
 interface TabFavoriteTrackProps {
-	tracks: ITrack[]
+	tracks: ITrackView[] | undefined
 	active: 'my' | 'favorites' | 'settings'
 }
 
@@ -20,7 +20,7 @@ export function TabFavoriteTrack({ tracks, active }: TabFavoriteTrackProps) {
 				Сохранённые маршруты
 			</h5>
 			<div className='row g-4' id='myFavorites'>
-				{tracks.length > 0 ? (
+				{tracks && tracks.length > 0 ? (
 					tracks.map((track, index) => <TrackListItem track={track} key={index} />)
 				) : (
 					<div className='col-12'>

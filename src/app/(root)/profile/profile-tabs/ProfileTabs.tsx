@@ -11,11 +11,11 @@ import { TabsHeader } from '@/app/(root)/profile/profile-tabs/TabsHeader'
 
 import { profileService } from '@/services/profile.service'
 
-import { ITrack } from '@/shared/types/track.interface'
+import { ITrack, ITrackView } from '@/shared/types/track.interface'
 
 interface ProfileTabsProps {
 	myTracks: ITrack[]
-	favorites: ITrack[]
+	favorites: ITrackView[] | undefined
 	settings: {
 		name: string
 		bio: string

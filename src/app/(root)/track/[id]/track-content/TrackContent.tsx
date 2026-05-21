@@ -15,6 +15,7 @@ import { TrackMap } from '@/app/(root)/track/[id]/track-map/TrackMap'
 import { PUBLIC_URL } from '@/config/url.config'
 
 import { useGetComments } from '@/hooks/queries/comments/useGetComments'
+import { useToggleFavorites } from '@/hooks/queries/favorites/useToggleFavorites'
 import { useGetTrackInLike } from '@/hooks/queries/likes/useGetTrackInLike'
 import { useSetLikeToTrack } from '@/hooks/queries/likes/useSetLikeToTrack'
 import { useProfile } from '@/hooks/useProfile'
@@ -31,6 +32,10 @@ export function TrackContent({ track }: TrackContentProps) {
 	const { user } = useProfile()
 	const { toggleLike, isLoadingToggleLike } = useSetLikeToTrack()
 	const { liked: isLike, isLoading: isLikeLoading } = useGetTrackInLike(track.id)
+
+	const [inFav, setInFav] = useState<boolean>(false)
+	const { toggleFavorite, isLoadingToggleFavorites } = useToggleFavorites()
+
 	const router = useRouter()
 
 	const { comments, isLoading, isError } = useGetComments(track.id)
@@ -41,6 +46,10 @@ export function TrackContent({ track }: TrackContentProps) {
 	useEffect(() => {
 		if (isLike !== undefined) setIsLiked(isLike)
 		setLikeCount(track.likes)
+
+		if (user && user.favorites) {
+			setInFav(user.favorites.includes(track.id))
+		}
 	}, [isLike, track])
 
 	const hadleLikeClick = async () => {
@@ -62,6 +71,18 @@ export function TrackContent({ track }: TrackContentProps) {
 			setLikeCount(prevLikeCount)
 		}
 	}
+
+	const handleFavClick = () => {
+		if (!user) {
+			router.push(PUBLIC_URL.auth('/login'))
+			return
+		}
+
+		toggleFavorite(track.id)
+		setInFav(!inFav)
+	}
+
+	if (!user) return null
 
 	return (
 		<div id='postContent'>
@@ -110,8 +131,13 @@ export function TrackContent({ track }: TrackContentProps) {
 									<i className='fa-regular fa-heart'></i>
 									Нравится: <span id='postLikeCount'>{likeCountLocal}</span>
 								</button>
-								<button id='postFavBtn' className={`btn-outline-green ${style.track_content_btn}`}>
-									<i className='fa-regular fa-bookmark'></i> В избранное
+								<button
+									id='postFavBtn'
+									onClick={handleFavClick}
+									disabled={isLoadingToggleFavorites}
+									className={`btn-outline-green btn-like ${style.track_content_btn} ${inFav ? 'liked' : ''}`}
+								>
+									<i className='fa-regular fa-bookmark'></i> {inFav ? 'Из избранного' : 'В избранное'}
 								</button>
 								<Link
 									href={PUBLIC_URL.feed()}

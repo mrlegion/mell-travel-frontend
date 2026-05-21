@@ -20,10 +20,14 @@ interface TrackListItemProps {
 }
 
 export function TrackListItem({ track }: TrackListItemProps) {
+	if (!track) return null
+
 	const router = useRouter()
 
 	const image =
-		track.images.length > 0 ? track.images[0] : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
+		track.images?.length > 0
+			? track.images[0]
+			: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
 
 	const { user } = useProfile()
 	const { liked: isLiked, isLoading: isLikeLoading } = useGetTrackInLike(track.id)
@@ -84,25 +88,29 @@ export function TrackListItem({ track }: TrackListItemProps) {
 				<div className='card-title'>{track.title}</div>
 				<div className='card-text'>{track.excerpt}</div>
 				<div className='d-flex gap-1 flex-wrap mb-2'>
-					{track.tags.map((tag, index) => (
-						<span className='tag' key={index}>
-							{tag}
-						</span>
-					))}
+					{track.tags &&
+						track.tags?.length > 0 &&
+						track.tags.map((tag, index) => (
+							<span className='tag' key={index}>
+								{tag}
+							</span>
+						))}
 				</div>
 				<div className='card-meta'>
 					<div className='author' style={{ cursor: 'pointer' }}>
-						{track.account.avatar ? (
+						{track.account && track.account?.avatar ? (
 							<img className='avatar-sm' src={track.account.avatar} alt={track.account.name} />
 						) : (
 							<div
 								className='avatar-fallback'
-								style={{ backgroundColor: getAvatarColorSimple(track.account.name) }}
+								style={{
+									backgroundColor: getAvatarColorSimple(track.account?.name)
+								}}
 							>
-								{track.account.name?.[0]?.toUpperCase() || '?'}
+								{track.account?.name?.[0]?.toUpperCase() || '?'}
 							</div>
 						)}
-						<span>{track.account.name}</span>
+						<span>{track.account?.name}</span>
 					</div>
 					<div>♥ {localLikes}</div>
 				</div>
