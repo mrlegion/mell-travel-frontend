@@ -8,6 +8,7 @@ import { FaArrowLeft, FaMapLocationDot } from 'react-icons/fa6'
 
 import { TrackComment } from '@/app/(root)/track/[id]/track-comment/TrackComment'
 import { CommentForm } from '@/app/(root)/track/[id]/track-content/CommentForm'
+import { TrackControl } from '@/app/(root)/track/[id]/track-content/TrackControl'
 import { TrackInfo } from '@/app/(root)/track/[id]/track-content/TrackInfo'
 import { TrackGallery } from '@/app/(root)/track/[id]/track-gallery/TrackGallery'
 import { TrackMap } from '@/app/(root)/track/[id]/track-map/TrackMap'
@@ -81,8 +82,6 @@ export function TrackContent({ track }: TrackContentProps) {
 		toggleFavorite(track.id)
 		setInFav(!inFav)
 	}
-
-	if (!user) return null
 
 	return (
 		<div id='postContent'>
@@ -163,7 +162,7 @@ export function TrackContent({ track }: TrackContentProps) {
 									{comments && comments.length > 0
 										? comments.map((comment, index) => (
 												<TrackComment
-													author={track.account.name}
+													author={comment.author}
 													date={comment.createdAt}
 													text={comment.text}
 													key={index}
@@ -210,6 +209,8 @@ export function TrackContent({ track }: TrackContentProps) {
 						</div>
 						<div className='col-lg-4'>
 							<TrackInfo
+								controlItem={!!user && track.account.id === user.id}
+								trackId={track.id}
 								duration={track.duration ? track.duration : '-'}
 								difficulty={track.difficulty ? track.difficulty : '-'}
 							/>

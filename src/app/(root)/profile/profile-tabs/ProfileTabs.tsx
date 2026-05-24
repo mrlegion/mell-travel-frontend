@@ -17,6 +17,7 @@ interface ProfileTabsProps {
 	myTracks: ITrack[]
 	favorites: ITrackView[] | undefined
 	settings: {
+		id: string
 		name: string
 		bio: string
 		avatar: string
@@ -72,6 +73,8 @@ export function ProfileTabs({ myTracks, favorites, settings }: ProfileTabsProps)
 	const onTabClick = (name: TTab) => {
 		setTab(name)
 	}
+
+	const onChange = (value: string[]) => {}
 
 	return (
 		<section className='section-pad bg-off-white'>

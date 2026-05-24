@@ -27,6 +27,11 @@ export interface ITrackCreate extends Omit<
 	'id' | 'likes' | 'comments' | 'createdAt' | 'updatedAt' | 'account'
 > {}
 
+export interface ITrackUpdate extends Omit<
+	ITrack,
+	'id' | 'likes' | 'comments' | 'createdAt' | 'updatedAt' | 'account'
+> {}
+
 export interface ITrackView extends Pick<
 	ITrack,
 	'id' | 'title' | 'region' | 'tags' | 'excerpt' | 'difficulty' | 'images' | 'likes' | 'account'

@@ -26,13 +26,15 @@ export function CreateTrack() {
 	const { user } = useProfile()
 	useEffect(() => {
 		if (!user) router.push(PUBLIC_URL.auth('/login'))
-	}, [user])
+	}, [])
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		trigger
+		trigger,
+		setValue,
+		watch
 	} = useForm<StepData>({
 		defaultValues: {
 			difficulty: 'Средний',
@@ -64,21 +66,24 @@ export function CreateTrack() {
 	const { createTrack, isCreateLoading } = useCreateTrack()
 
 	const onHandleSubmit: SubmitHandler<StepData> = data => {
+		console.log(data)
+
 		createTrack({
 			title: data.title,
 			region: data.region,
 			tags: data.tags
-				.split(',')
-				.map(tag => tag.trim())
-				.filter(Boolean),
+				? data.tags.includes(',')
+					? data.tags
+							.split(',')
+							.map(tag => tag.trim())
+							.filter(Boolean)
+					: [data.tags.trim()].filter(Boolean)
+				: [data.tags],
 			difficulty: data.difficulty,
 			duration: data.duration,
 			text: data.text,
 			excerpt: data.text.substring(0, 120) + '...',
-			images: data.images
-				.split('\n')
-				.map(s => s.trim())
-				.filter(s => s.startsWith('http')),
+			images: data.images,
 			lat: markerPosition?.[0] || 60,
 			lng: markerPosition?.[1] || 90,
 			date: new Date().toISOString().split('T')[0]
@@ -116,9 +121,10 @@ export function CreateTrack() {
 								)}
 								{activeIndex === 3 && (
 									<CreateTrackStepMapAndPhoto
+										watch={watch}
+										setValue={setValue}
 										handleMapClick={handleMapClick}
 										markerPosition={markerPosition}
-										register={register}
 										onPrevStep={handlePrevClick}
 									/>
 								)}

@@ -7,5 +7,6 @@ export const API_URL = {
 	tracks: (url = '') => API_URL.root(`/track${url}`),
 	profile: (url = '') => API_URL.root(`/profile${url}`),
 	favorite: (url = '') => API_URL.root(`/favorite${url}`),
-	like: (url = '') => API_URL.root(`/like${url}`)
+	like: (url = '') => API_URL.root(`/like${url}`),
+	files: () => API_URL.root('/file')
 }

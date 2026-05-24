@@ -11,7 +11,7 @@ export type Step2 = {
 }
 
 export type Step3 = {
-	images: string
+	images: string[]
 }
 
 export type StepData = Step1 &

@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 import { ProfileViewTabs } from '@/app/(root)/profile/[id]/ProfileViewTabs'
 import { ProfileHero } from '@/app/(root)/profile/profile-hero/ProfileHero'
 import { ProfileTabs } from '@/app/(root)/profile/profile-tabs/ProfileTabs'
@@ -16,7 +18,11 @@ interface ProfileViewProps {
 
 export function ProfileView({ user, tracks }: ProfileViewProps) {
 	const counts = tracks ? tracks.length : 0
-	const likes = Math.floor(Math.random() * (0 - 150 + 1)) + 150
+	const [likes, setLikes] = useState<number>(0)
+
+	useEffect(() => {
+		setLikes(Math.floor(Math.random() * (0 - 150 + 1)) + 150)
+	}, [])
 
 	const { favorites } = useGetFavoriteTrack(user.id)
 

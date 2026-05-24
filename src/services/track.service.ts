@@ -3,7 +3,7 @@ import { axiosClassic, axiosWithAuth } from '@/api/api.interceptors'
 import { API_URL } from '@/config/api.config'
 import { PUBLIC_URL } from '@/config/url.config'
 
-import type { IFilters, IRegion, ITrack, ITrackCreate, ITrackView } from '@/shared/types/track.interface'
+import type { IFilters, IRegion, ITrack, ITrackCreate, ITrackUpdate, ITrackView } from '@/shared/types/track.interface'
 
 class TrackService {
 	// ============================================================
@@ -141,6 +141,31 @@ class TrackService {
 		})
 
 		return data || []
+	}
+
+	// ============================================================
+	//   Обновление маршрута
+	// ============================================================
+	public async update(id: string, data: ITrackUpdate) {
+		const { data: result } = await axiosWithAuth<boolean>({
+			url: API_URL.tracks(`/${id}`),
+			method: 'PUT',
+			data
+		})
+
+		return result
+	}
+
+	// ============================================================
+	//   Удаление маршрута
+	// ============================================================
+	public async remove(id: string) {
+		const { data } = await axiosWithAuth<boolean>({
+			url: API_URL.tracks(`/${id}`),
+			method: 'DELETE'
+		})
+
+		return data
 	}
 }
 

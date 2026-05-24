@@ -1,13 +1,27 @@
-import { FaClock, FaMountain } from 'react-icons/fa6'
+import { FaClock, FaMountain, FaPencil, FaTrash } from 'react-icons/fa6'
+
+import { useRemoveTrack } from '@/hooks/queries/tracks/useRemoveTrack'
 
 import style from '../Track.module.scss'
 
 interface TrackInfoProps {
 	duration: string
 	difficulty: string
+	controlItem?: boolean
+	trackId: string
 }
 
-export function TrackInfo({ duration, difficulty }: TrackInfoProps) {
+export function TrackInfo({ duration, difficulty, trackId, controlItem = false }: TrackInfoProps) {
+	const { removeTrack, isLoadingRemove } = useRemoveTrack(trackId)
+
+	const showEditBtn = false
+
+	const handleRemoveClick = () => {
+		removeTrack()
+	}
+
+	const handleEditClick = () => {}
+
 	return (
 		<div className={style.track_info}>
 			<h6 className={style.track_info_title}>Информация о маршруте</h6>
@@ -34,6 +48,34 @@ export function TrackInfo({ duration, difficulty }: TrackInfoProps) {
 						{difficulty}
 					</strong>
 				</div>
+				{controlItem && (
+					<div
+						className='d-flex justify-content-end align-items-center py-2'
+						style={{ borderBottom: '1px solid var(--gray-pale)' }}
+					>
+						{showEditBtn && (
+							<button
+								className='btn btn-outline-green'
+								disabled={isLoadingRemove}
+								onClick={handleEditClick}
+							>
+								<FaPencil /> Изменить
+							</button>
+						)}
+
+						<button
+							className='btn btn-outline-danger'
+							style={{
+								borderRadius: '50px',
+								padding: '12px 28px'
+							}}
+							disabled={isLoadingRemove}
+							onClick={handleRemoveClick}
+						>
+							<FaTrash /> Удалить
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	)

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 
+import { useUpload } from '@/hooks/useUpload'
+
 import style from '../Profile.module.scss'
 
+const initialAvatar: string = '/profile/no-user-image.png'
+
 interface SettingsFormData {
+	id: string
 	name: string
 	bio: string
 	avatar: string
@@ -14,6 +19,7 @@ interface SettingsFormData {
 }
 
 interface TabSettingsProps {
+	id: string
 	name: string
 	bio: string
 	avatar: string
@@ -25,6 +31,7 @@ interface TabSettingsProps {
 }
 
 export function TabSettings({
+	id,
 	name,
 	bio,
 	avatar,
@@ -34,11 +41,15 @@ export function TabSettings({
 	active,
 	onUpdate
 }: TabSettingsProps) {
+	const [avatarUrl, setAvatarUrl] = useState<string>(avatar || '')
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		watch,
+		setValue
 	} = useForm<SettingsFormData>({
 		defaultValues: {
 			name,
@@ -51,8 +62,36 @@ export function TabSettings({
 		mode: 'onChange'
 	})
 
+	const currentAvatar = watch('avatar')
+
+	// Обновляем локальное состояние при изменении пропса
+	useEffect(() => {
+		setAvatarUrl(initialAvatar || '')
+	}, [initialAvatar])
+
+	const handleAvatarChange = (urls: string[]) => {
+		if (urls.length > 0) {
+			const newAvatarUrl = urls[0]
+			setAvatarUrl(newAvatarUrl)
+			// Обновляем значение в форме
+			setValue('avatar', newAvatarUrl, { shouldValidate: true })
+		}
+	}
+
+	const { isUploading, handleButtonClick, handleFileChange, fileInputRef } = useUpload(
+		handleAvatarChange,
+		`profile/${id}`
+	)
+
 	const onSubmit = (data: SettingsFormData) => {
-		onUpdate?.(data)
+		const formData = {
+			...data,
+			avatar: avatarUrl
+		}
+
+		console.log(avatarUrl, formData)
+
+		onUpdate?.(formData)
 	}
 
 	return (
@@ -63,6 +102,41 @@ export function TabSettings({
 						<div className='why-card'>
 							<h6 className={style.profile_form_title}>Личные данные</h6>
 							<div className='row g-3'>
+								<div className='col-12'>
+									<div
+										style={{
+											display: 'flex',
+											justifyContent: 'center'
+										}}
+									>
+										<button
+											type='button'
+											className='btn'
+											onClick={handleButtonClick}
+											disabled={isUploading}
+										>
+											{currentAvatar && (
+												<div className='mt-2'>
+													<img
+														src={currentAvatar}
+														alt='Avatar preview'
+														className='avatar-circle'
+														style={{ width: '200px', height: '200px', objectFit: 'cover' }}
+													/>
+												</div>
+											)}
+										</button>
+										<input
+											type='file'
+											ref={fileInputRef}
+											onChange={handleFileChange}
+											multiple
+											style={{ display: 'none' }}
+											className='form-control-mell'
+											id='profileAvatar'
+										/>
+									</div>
+								</div>
 								<div className='col-12'>
 									<label className='form-group'>
 										<span className={style.profile_form_label}>Имя</span>
@@ -85,18 +159,7 @@ export function TabSettings({
 									/>
 									{errors.name && <span className='text-danger'>{errors.name.message}</span>}
 								</div>
-								<div className='col-12'>
-									<label className='form-group'>
-										<span className={style.profile_form_label}>Аватар (URL)</span>
-									</label>
-									<input
-										type='text'
-										className='form-control-mell'
-										id='profileAvatar'
-										{...register('avatar')}
-									/>
-									{errors.avatar && <span className='text-danger'>{errors.avatar.message}</span>}
-								</div>
+
 								<div className='col-12'>
 									<label className='form-group'>
 										<span className={style.profile_form_label}>О себе</span>
