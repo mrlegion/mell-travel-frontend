@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: '/uploads/:path*',
-				destination: `${process.env.SERVER_URL ?? 'https://api.mell-travel.ru'}/uploads/:path*`
+				destination: `https://api.mell-travel.ru/uploads/:path*`
 			}
 		]
 	}
