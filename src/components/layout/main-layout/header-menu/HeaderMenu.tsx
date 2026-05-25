@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import { HamburgerButton } from '@/components/layout/main-layout/hamburger-button/HamburgerButton'
