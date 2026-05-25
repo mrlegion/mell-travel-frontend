@@ -181,7 +181,7 @@ export function CreateTrackStepMapAndPhoto({
 					<button type='button' className='btn-outline-green' onClick={onPrevStep}>
 						<FaArrowLeft /> Назад
 					</button>
-					<button type='submit' className='btn-primary-green'>
+					<button type='submit' className='btn-primary-green' disabled={isUploading}>
 						<FaPaperPlane /> Опубликовать
 					</button>
 				</div>

@@ -6,6 +6,7 @@ import { useUpload } from '@/hooks/useUpload'
 
 import style from '../Profile.module.scss'
 
+
 const initialAvatar: string = '/profile/no-user-image.png'
 
 interface SettingsFormData {
@@ -182,7 +183,7 @@ export function TabSettings({
 										type='submit'
 										className='btn-primary-green'
 										style={{ width: '100%', justifyContent: 'center' }}
-										disabled={Object.keys(errors).length > 0}
+										disabled={Object.keys(errors).length > 0 || isUploading}
 									>
 										Сохранить изменения
 									</button>
