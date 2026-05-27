@@ -38,10 +38,14 @@ axiosWithAuth.interceptors.response.use(
 		) {
 			originalRequest._isRetry = true
 			try {
+				console.log('Attempting to refresh token...')
 				await authService.getNewTokens()
+				console.log('Token refreshed successfully')
 				return axiosWithAuth.request(originalRequest)
 			} catch (error) {
-				if (errorCatch(error) === 'Токен истек') removeFromStorage()
+				console.log('Token refresh failed:', error)
+				if (errorCatch(error) === 'Токен истек' || errorCatch(error) === 'Не верный токен обновления')
+					removeFromStorage()
 			}
 		}
 
