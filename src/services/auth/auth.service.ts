@@ -1,11 +1,8 @@
-import Cookies from 'js-cookie'
-import { toast } from 'react-hot-toast'
-
 import { axiosClassic, axiosWithAuth } from '@/api/api.interceptors'
 
 import { API_URL } from '@/config/api.config'
 
-import { EnumTokens, getRefreshToken, removeFromStorage, saveTokenStorage } from '@/services/auth/auth-token.serice'
+import { removeFromStorage, saveTokenStorage } from '@/services/auth/auth-token.serice'
 
 import { IAuthForm, IAuthLogout, IAuthResponse } from '@/shared/types/auth.interface'
 
@@ -33,25 +30,21 @@ class AuthService {
 	//   Запрос нового токена
 	// ============================================================
 	public async getNewTokens() {
-		const refreshToken = getRefreshToken()
-		if (!refreshToken) throw new Error('Токен обновления не найден')
+		console.log('Запрос новых токенов...')
 
-		try {
-			const response = await axiosClassic<IAuthResponse>({
-				url: API_URL.auth('/refresh'),
-				method: 'POST',
-				data: {
-					refreshToken
-				}
-			})
+		const response = await axiosClassic<IAuthResponse>({
+			url: API_URL.auth('/refresh'),
+			method: 'POST'
+		})
 
-			if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
-
-			return response
-		} catch (error: any) {
-			removeFromStorage()
-			toast.error(error?.response?.data?.message || 'Ошибка обновления токена')
+		if (response.data.accessToken) {
+			saveTokenStorage(response.data.accessToken)
+			console.log('Токены успешно получены')
+		} else {
+			console.log('Ошибка получения токенов')
 		}
+
+		return response
 	}
 
 	// ============================================================
