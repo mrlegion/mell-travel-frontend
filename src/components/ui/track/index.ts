@@ -1,1 +1,7 @@
 export * from './TrackListItem'
+export * from './steps/TrackStepMain'
+export * from './steps/TrackStepHistory'
+export * from './steps/TrackStepMapAndPhoto'
+export * from './support-info/TrackSupportInfo'
+export * from './track-hero/TrackHero'
+export * from './track-indicators'

@@ -1,4 +1,7 @@
+import { useRouter } from 'next/navigation'
 import { FaClock, FaMountain, FaPencil, FaTrash } from 'react-icons/fa6'
+
+import { PUBLIC_URL } from '@/config/url.config'
 
 import { useRemoveTrack } from '@/hooks/queries/tracks/useRemoveTrack'
 
@@ -14,13 +17,15 @@ interface TrackInfoProps {
 export function TrackInfo({ duration, difficulty, trackId, controlItem = false }: TrackInfoProps) {
 	const { removeTrack, isLoadingRemove } = useRemoveTrack(trackId)
 
-	const showEditBtn = false
+	const router = useRouter()
 
 	const handleRemoveClick = () => {
 		removeTrack()
 	}
 
-	const handleEditClick = () => {}
+	const handleEditClick = () => {
+		router.push(PUBLIC_URL.editTrack(trackId))
+	}
 
 	return (
 		<div className={style.track_info}>
@@ -50,18 +55,12 @@ export function TrackInfo({ duration, difficulty, trackId, controlItem = false }
 				</div>
 				{controlItem && (
 					<div
-						className='d-flex justify-content-end align-items-center py-2'
+						className='d-flex justify-content-between align-items-center py-2'
 						style={{ borderBottom: '1px solid var(--gray-pale)' }}
 					>
-						{showEditBtn && (
-							<button
-								className='btn btn-outline-green'
-								disabled={isLoadingRemove}
-								onClick={handleEditClick}
-							>
-								<FaPencil /> Изменить
-							</button>
-						)}
+						<button className='btn btn-outline-green' disabled={isLoadingRemove} onClick={handleEditClick}>
+							<FaPencil /> Изменить
+						</button>
 
 						<button
 							className='btn btn-outline-danger'

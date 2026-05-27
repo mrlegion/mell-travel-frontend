@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { Track } from '@/app/(root)/track/[id]/Track'
-
 import { trackService } from '@/services/track.service'
+
+import { EditTrack } from './EditTrack'
 
 async function getTrack(id: string) {
 	try {
@@ -15,7 +15,7 @@ async function getTrack(id: string) {
 	}
 }
 
-export async function generateMetadata({ params }: ITrackPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: IEditTrackPageProps): Promise<Metadata> {
 	const { id } = await params
 	const { track } = await getTrack(id)
 
@@ -25,14 +25,13 @@ export async function generateMetadata({ params }: ITrackPageProps): Promise<Met
 	}
 }
 
-interface ITrackPageProps {
-	params: Promise<{
-		id: string
-	}>
+interface IEditTrackPageProps {
+	params: Promise<{ id: string }>
 }
 
-export default async function TrackPage({ params }: ITrackPageProps) {
+export default async function EditTrackPage({ params }: IEditTrackPageProps) {
 	const { id } = await params
 	const { track } = await getTrack(id)
-	return <Track initialTrack={track} id={id} />
+
+	return <EditTrack track={track} id={id} />
 }

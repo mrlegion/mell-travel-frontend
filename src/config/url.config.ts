@@ -9,6 +9,7 @@ export const PUBLIC_URL = {
 	track: (id = '') => PUBLIC_URL.root(`/track/${id}`),
 	filtered: () => PUBLIC_URL.root('/track/filtered'),
 	createTrack: () => PUBLIC_URL.root('/track/create'),
+	editTrack: (id = '') => PUBLIC_URL.root(`/track/edit/${id}`),
 	mapExplorer: () => PUBLIC_URL.root('/map-explorer'),
 	about: () => PUBLIC_URL.root('/about'),
 	rules: () => PUBLIC_URL.root('/rules'),

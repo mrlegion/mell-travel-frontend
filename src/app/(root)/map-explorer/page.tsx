@@ -3,10 +3,12 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
+import { Loader } from '@/components/ui/loader/Loader'
+
 // Динамически импортируем компонент без SSR
 const MapExplorer = dynamic(() => import('@/app/(root)/map-explorer/MapExplorer'), {
 	ssr: false,
-	loading: () => <div className='map-explorer-loading'>Загрузка карты...</div>
+	loading: () => <Loader />
 })
 
 export default function MapExplorerPage() {

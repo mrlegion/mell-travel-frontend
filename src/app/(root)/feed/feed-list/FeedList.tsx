@@ -55,9 +55,7 @@ export function FeedList() {
 			<section className='section-pad bg-off-white'>
 				<div className='container'>
 					<div className='row g-4' id='feedGrid'>
-						{isLoading ? (
-							<Loader />
-						) : tracks && tracks.length > 0 ? (
+						{tracks && tracks.length > 0 ? (
 							tracks.map((item, index) => <TrackListItem track={item} key={index} />)
 						) : (
 							<div>Маршруты не найдены</div>

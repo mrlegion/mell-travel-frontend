@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { StepData } from '@/app/(root)/track/create/create-track-steps/step.types'
 
-
 import {
 	TrackHero,
 	TrackIndicators,
@@ -15,21 +14,32 @@ import {
 	TrackStepMapAndPhoto,
 	TrackSupportInfo
 } from '@/components/ui'
+import { Loader } from '@/components/ui/loader/Loader'
 
 import { PUBLIC_URL } from '@/config/url.config'
 
-import { useCreateTrack } from '@/hooks/queries/tracks/useCreateTrack'
+import { useUpdateTrack } from '@/hooks/queries/tracks/useUpdateTrack'
 import { useProfile } from '@/hooks/useProfile'
 
-export function CreateTrack() {
+import { ITrack } from '@/shared/types/track.interface'
+
+interface IEditTrackProps {
+	track: ITrack
+	id?: string
+}
+
+export function EditTrack({ track, id }: IEditTrackProps) {
 	const [activeIndex, setActiveIndex] = useState<number>(1)
 	const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null)
 
 	const router = useRouter()
-
 	const { user } = useProfile()
 	useEffect(() => {
-		if (!user) router.push(PUBLIC_URL.auth('/login'))
+		if (user && track.account.id !== user.id) {
+			router.push(PUBLIC_URL.feed())
+		}
+
+		setMarkerPosition([track.lat, track.lng])
 	}, [])
 
 	const {
@@ -42,8 +52,14 @@ export function CreateTrack() {
 	} = useForm<StepData>({
 		defaultValues: {
 			difficulty: 'Средний',
-			lat: null,
-			lng: null
+			lat: track.lat,
+			lng: track.lng,
+			title: track.title,
+			region: track.region,
+			tags: track.tags.join(', '),
+			text: track.text,
+			images: track.images,
+			duration: track.duration
 		}
 	})
 
@@ -67,12 +83,16 @@ export function CreateTrack() {
 		else setActiveIndex(activeIndex - 1)
 	}
 
-	const { createTrack, isCreateLoading } = useCreateTrack()
+	const handleMapClick = (lat: number, lng: number) => {
+		setMarkerPosition([lat, lng])
+	}
+
+	const { updateTrack, isUpdateLoading } = useUpdateTrack(track.id)
 
 	const onHandleSubmit: SubmitHandler<StepData> = data => {
 		console.log(data)
 
-		createTrack({
+		updateTrack({
 			title: data.title,
 			region: data.region,
 			tags: data.tags
@@ -94,13 +114,10 @@ export function CreateTrack() {
 		})
 	}
 
-	const handleMapClick = (lat: number, lng: number) => {
-		setMarkerPosition([lat, lng])
-	}
-
 	return (
 		<>
-			<TrackHero mode='create' />
+			{isUpdateLoading && <Loader />}
+			<TrackHero mode={'edit'} title={track.title} text={track.excerpt} />
 			<section className='section-pad bg-off-white'>
 				<div className='container'>
 					<div className='row justify-content-center'>
@@ -126,6 +143,7 @@ export function CreateTrack() {
 										handleMapClick={handleMapClick}
 										markerPosition={markerPosition}
 										onPrevStep={handlePrevClick}
+										btnText='Изменить'
 									/>
 								)}
 							</form>

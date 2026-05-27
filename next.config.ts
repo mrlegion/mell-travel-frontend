@@ -27,9 +27,13 @@ const nextConfig: NextConfig = {
 	},
 	async rewrites() {
 		return [
+			// {
+			// 	source: '/uploads/:path*',
+			// 	destination: `https://api.mell-travel.ru/uploads/:path*`
+			// },
 			{
 				source: '/uploads/:path*',
-				destination: `https://api.mell-travel.ru/uploads/:path*`
+				destination: `${process.env.SERVER_URL}/uploads/:path*`
 			}
 		]
 	}

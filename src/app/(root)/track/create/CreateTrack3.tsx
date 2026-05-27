@@ -4,17 +4,13 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { CreateTrackHero } from '@/app/(root)/track/create/create-track-hero/CreateTrackHero'
+import { CreateTrackStepIndicator } from '@/app/(root)/track/create/create-track-step-indicator/CreateTrackStepIndicator'
+import { CreateTrackStepHistory } from '@/app/(root)/track/create/create-track-steps/CreateTrackStepHistory'
+import { CreateTrackStepMain } from '@/app/(root)/track/create/create-track-steps/CreateTrackStepMain'
+import { CreateTrackStepMapAndPhoto } from '@/app/(root)/track/create/create-track-steps/CreateTrackStepMapAndPhoto'
 import { StepData } from '@/app/(root)/track/create/create-track-steps/step.types'
-
-
-import {
-	TrackHero,
-	TrackIndicators,
-	TrackStepHistory,
-	TrackStepMain,
-	TrackStepMapAndPhoto,
-	TrackSupportInfo
-} from '@/components/ui'
+import { CreateTrackSupportInfo } from '@/app/(root)/track/create/create-track-support-info/CreateTrackSupportInfo'
 
 import { PUBLIC_URL } from '@/config/url.config'
 
@@ -100,19 +96,23 @@ export function CreateTrack() {
 
 	return (
 		<>
-			<TrackHero mode='create' />
+			<CreateTrackHero />
 			<section className='section-pad bg-off-white'>
 				<div className='container'>
 					<div className='row justify-content-center'>
 						<div className='col-lg-8'>
-							<TrackIndicators activeIndex={activeIndex} />
+							<CreateTrackStepIndicator activeIndex={activeIndex} />
 
 							<form onSubmit={handleSubmit(onHandleSubmit)}>
 								{activeIndex === 1 && (
-									<TrackStepMain register={register} errors={errors} onNexStep={handleNextClick} />
+									<CreateTrackStepMain
+										register={register}
+										errors={errors}
+										onNexStep={handleNextClick}
+									/>
 								)}
 								{activeIndex === 2 && (
-									<TrackStepHistory
+									<CreateTrackStepHistory
 										register={register}
 										errors={errors}
 										onNexStep={handleNextClick}
@@ -120,7 +120,7 @@ export function CreateTrack() {
 									/>
 								)}
 								{activeIndex === 3 && (
-									<TrackStepMapAndPhoto
+									<CreateTrackStepMapAndPhoto
 										watch={watch}
 										setValue={setValue}
 										handleMapClick={handleMapClick}
@@ -130,7 +130,7 @@ export function CreateTrack() {
 								)}
 							</form>
 
-							<TrackSupportInfo />
+							<CreateTrackSupportInfo />
 						</div>
 					</div>
 				</div>
