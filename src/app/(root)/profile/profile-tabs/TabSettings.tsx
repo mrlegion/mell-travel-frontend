@@ -6,7 +6,6 @@ import { useUpload } from '@/hooks/useUpload'
 
 import style from '../Profile.module.scss'
 
-
 const initialAvatar: string = '/profile/no-user-image.png'
 
 interface SettingsFormData {
@@ -67,7 +66,7 @@ export function TabSettings({
 
 	// Обновляем локальное состояние при изменении пропса
 	useEffect(() => {
-		setAvatarUrl(initialAvatar || '')
+		setAvatarUrl(avatar || initialAvatar)
 	}, [initialAvatar])
 
 	const handleAvatarChange = (urls: string[]) => {
