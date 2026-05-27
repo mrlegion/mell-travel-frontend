@@ -6,6 +6,7 @@ import { FeedHeader } from '@/app/(root)/feed/feed-header/FeedHeader'
 import { FeedPublish } from '@/app/(root)/feed/feed-publish/FeedPublish'
 
 import { TrackListItem } from '@/components/ui'
+import { Loader } from '@/components/ui/loader/Loader'
 
 import { useGetFilteredTracks } from '@/hooks/queries/tracks/useGetFilteredTracks'
 
@@ -55,7 +56,7 @@ export function FeedList() {
 				<div className='container'>
 					<div className='row g-4' id='feedGrid'>
 						{isLoading ? (
-							<div>Загрузка...</div>
+							<Loader />
 						) : tracks && tracks.length > 0 ? (
 							tracks.map((item, index) => <TrackListItem track={item} key={index} />)
 						) : (

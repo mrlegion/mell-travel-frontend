@@ -4,6 +4,8 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useRef } from 'react'
 
+import { Loader } from '@/components/ui/loader/Loader'
+
 import { useGetAllTrack } from '@/hooks/queries/tracks/useGetAllTrack'
 
 export default function MapExplorer() {
@@ -91,7 +93,7 @@ export default function MapExplorer() {
 	}, [tracks, isLoading])
 
 	if (isLoading) {
-		return <div className='map-explorer-loading'>Загрузка карты...</div>
+		return <Loader />
 	}
 
 	return (
