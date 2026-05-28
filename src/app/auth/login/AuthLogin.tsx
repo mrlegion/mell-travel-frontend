@@ -34,11 +34,11 @@ export function AuthLogin() {
 		mutationFn: async (data: IAuthForm) => {
 			await authService.main('login', data)
 		},
-		onSuccess: () => {
-			toast.success('Успешная авторизация')
+		onSuccess() {
 			router.push(PUBLIC_URL.profile())
+			toast.success('Успешная авторизация')
 		},
-		onError: (error: any) => {
+		onError(error: any) {
 			toast.error(error.response?.data?.message || 'Ошибка авторизации')
 		}
 	})

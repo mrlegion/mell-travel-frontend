@@ -17,9 +17,3 @@ export const PUBLIC_URL = {
 	profile: () => PUBLIC_URL.root(`/profile`),
 	user: (id = '') => PUBLIC_URL.root(`/profile/${id}`)
 }
-
-export const PROFILE_URL = {
-	root: (url = '') => `${url ? url : ''}`,
-
-	home: () => PROFILE_URL.root('/profile')
-}
