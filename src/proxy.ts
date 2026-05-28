@@ -4,7 +4,7 @@ import { PUBLIC_URL } from '@/config/url.config'
 
 import { EnumTokens } from '@/services/auth/auth-token.serice'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
 	const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 
 	const isAuthPage = request.nextUrl.pathname.startsWith('/auth')
