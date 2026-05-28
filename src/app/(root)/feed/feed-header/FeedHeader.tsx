@@ -3,6 +3,8 @@
 
 import React, { useEffect, useState } from 'react'
 
+import { useGetAllTags } from '@/hooks/queries/tracks/useGetAllTags'
+
 interface FeedHeaderControlsProps {
 	onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onRegionChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
@@ -29,6 +31,8 @@ export function FeedHeader({
 }: FeedHeaderControlsProps) {
 	const [searchValue, setSearchValue] = useState(currentFilters.searchTerm || '')
 
+	const { tags } = useGetAllTags()
+
 	// Синхронизируем значение поиска с URL
 	useEffect(() => {
 		setSearchValue(currentFilters.searchTerm || '')
@@ -38,8 +42,6 @@ export function FeedHeader({
 		setSearchValue(e.target.value)
 		onSearch(e)
 	}
-
-	const commonTags = ['горы', 'трекинг', 'зима', 'водный туризм', 'вулканы', 'природа', 'дикая природа']
 
 	return (
 		<div className='feed-header'>
@@ -107,7 +109,7 @@ export function FeedHeader({
 					>
 						Все
 					</button>
-					{commonTags.map(tag => (
+					{tags.map(tag => (
 						<button
 							key={tag}
 							className={`tag filter-tag-btn ${activeTag === tag ? 'active' : ''}`}

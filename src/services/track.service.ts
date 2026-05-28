@@ -3,7 +3,15 @@ import { axiosClassic, axiosWithAuth } from '@/api/api.interceptors'
 import { API_URL } from '@/config/api.config'
 import { PUBLIC_URL } from '@/config/url.config'
 
-import type { IFilters, IRegion, ITrack, ITrackCreate, ITrackUpdate, ITrackView } from '@/shared/types/track.interface'
+import type {
+	IFilters,
+	IRegion,
+	ITags,
+	ITrack,
+	ITrackCreate,
+	ITrackUpdate,
+	ITrackView
+} from '@/shared/types/track.interface'
 
 class TrackService {
 	// ============================================================
@@ -163,6 +171,18 @@ class TrackService {
 		const { data } = await axiosWithAuth<boolean>({
 			url: API_URL.tracks(`/${id}`),
 			method: 'DELETE'
+		})
+
+		return data
+	}
+
+	// ============================================================
+	//   Получение всех тэгов
+	// ============================================================
+	public async getTags() {
+		const { data } = await axiosClassic<ITags>({
+			url: API_URL.tracks('/tags'),
+			method: 'GET'
 		})
 
 		return data

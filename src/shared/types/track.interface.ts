@@ -49,3 +49,7 @@ export interface IFilters {
 	tag?: string | null
 	sortBy?: string | null
 }
+
+export interface ITags {
+	tags: string[]
+}
