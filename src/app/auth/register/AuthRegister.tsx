@@ -36,7 +36,7 @@ export function AuthRegister() {
 			await authService.main('register', data)
 		},
 		onSuccess: () => {
-			toast.success('Успешная регистрация')
+			toast.success('Успешная регистрация', { duration: 2000 })
 			router.push(PUBLIC_URL.profile())
 		},
 		onError: (error: any) => {

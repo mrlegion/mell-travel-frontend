@@ -35,8 +35,8 @@ export function AuthLogin() {
 			await authService.main('login', data)
 		},
 		onSuccess() {
+			toast.success('Успешная авторизация', { duration: 2000 })
 			router.push(PUBLIC_URL.profile())
-			toast.success('Успешная авторизация')
 		},
 		onError(error: any) {
 			toast.error(error.response?.data?.message || 'Ошибка авторизации')

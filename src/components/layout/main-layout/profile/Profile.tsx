@@ -23,9 +23,9 @@ export function Profile() {
 		mutationFn: () => authService.logout(),
 		onSuccess: () => {
 			queryClient.clear()
+			toast.success('Успешный выход из системы', { duration: 2000 })
 			router.push(PUBLIC_URL.home())
 			router.refresh()
-			toast.success('Успешный выход из системы')
 		}
 	})
 

@@ -62,7 +62,7 @@ export function TrackContent({ track }: TrackContentProps) {
 
 	const handleFavClick = () => {
 		if (!user) {
-			toast.error('Для отметки понравившегося маршрута требуется войти в аккаунт или зарегистрироваться', {
+			toast.error('Для добавления маршрута в Избранное требуется войти в аккаунт или зарегистрироваться', {
 				duration: 3000
 			})
 		} else {
