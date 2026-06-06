@@ -22,6 +22,12 @@ interface TrackListItemProps {
 export function TrackListItem({ track }: TrackListItemProps) {
 	if (!track) return null
 
+	const [likesCount, setLikesCount] = useState<number>(0)
+
+	useEffect(() => {
+		setLikesCount(Math.floor(Math.random() * (300 - 10 + 1)) + 10)
+	}, [])
+
 	const router = useRouter()
 
 	const image =
@@ -30,34 +36,11 @@ export function TrackListItem({ track }: TrackListItemProps) {
 			: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
 
 	const { user } = useProfile()
-	const { liked: isLiked, isLoading: isLikeLoading } = useGetTrackInLike(track.id)
+	const likes = user?.likes ? user.likes : []
 	const { toggleLike, isLoadingToggleLike } = useSetLikeToTrack()
 
-	const [localIsLiked, setLocalIsLiked] = useState<boolean>(false)
-	const [localLikes, setLocalLikes] = useState<number>(track.likes)
-
-	useEffect(() => {
-		if (isLiked !== undefined) setLocalIsLiked(isLiked)
-	}, [isLiked])
-
 	const handleLikeClick = async () => {
-		if (!user) {
-			router.push(PUBLIC_URL.auth('/login'))
-			return
-		}
-
-		const prevIsLikes = localIsLiked
-		const prevLikes = localLikes
-
-		setLocalIsLiked(!localIsLiked)
-		setLocalLikes(prev => (localIsLiked ? prev - 1 : prev + 1))
-
-		try {
-			await toggleLike(track.id)
-		} catch (error) {
-			setLocalIsLiked(prevIsLikes)
-			setLocalLikes(prevLikes)
-		}
+		toggleLike(track.id)
 	}
 
 	return (
@@ -74,10 +57,10 @@ export function TrackListItem({ track }: TrackListItemProps) {
 				<span className='card-badge'>{track.difficulty || 'Маршрут'}</span>
 				{user && (
 					<button
-						className={`card-like ${localIsLiked ? 'liked' : ''}`}
+						className={`card-like ${likes.includes(track.id) ? 'liked' : ''}`}
 						data-post-id={track.id}
 						onClick={handleLikeClick}
-						disabled={isLoadingToggleLike || isLikeLoading}
+						disabled={isLoadingToggleLike}
 					>
 						<FaHeart />
 					</button>
@@ -112,7 +95,7 @@ export function TrackListItem({ track }: TrackListItemProps) {
 						)}
 						<span>{track.account?.name}</span>
 					</div>
-					<div>♥ {localLikes}</div>
+					<div>♥ {likesCount}</div>
 				</div>
 			</div>
 		</div>

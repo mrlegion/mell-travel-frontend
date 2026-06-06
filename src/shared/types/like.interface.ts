@@ -11,6 +11,6 @@ export interface LikeToggle {
 }
 
 export interface ILikeResponse {
-	likes: boolean
+	liked: boolean
 	trackId: string
 }

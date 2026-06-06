@@ -4,6 +4,7 @@ import { router } from 'next/client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { FaArrowLeft, FaMapLocationDot } from 'react-icons/fa6'
 
 import { TrackComment } from '@/app/(root)/track/[id]/track-comment/TrackComment'
@@ -32,55 +33,42 @@ interface TrackContentProps {
 export function TrackContent({ track }: TrackContentProps) {
 	const { user } = useProfile()
 	const { toggleLike, isLoadingToggleLike } = useSetLikeToTrack()
-	const { liked: isLike, isLoading: isLikeLoading } = useGetTrackInLike(track.id)
-
+	const [likeCount, setLikeCount] = useState<number>(0)
 	const [inFav, setInFav] = useState<boolean>(false)
 	const { toggleFavorite, isLoadingToggleFavorites } = useToggleFavorites()
 
 	const router = useRouter()
 
 	const { comments, isLoading, isError } = useGetComments(track.id)
-
-	const [isLikedLocal, setIsLiked] = useState<boolean>(false)
-	const [likeCountLocal, setLikeCount] = useState<number>(track.likes)
-
 	useEffect(() => {
-		if (isLike !== undefined) setIsLiked(isLike)
-		setLikeCount(track.likes)
-
 		if (user && user.favorites) {
 			setInFav(user.favorites.includes(track.id))
 		}
-	}, [isLike, track])
+	}, [track.id, user])
 
-	const hadleLikeClick = async () => {
+	useEffect(() => {
+		setLikeCount(Math.floor(Math.random() * (300 - 10 + 1)) * 10)
+	}, [])
+
+	const hadleLikeClick = () => {
 		if (!user) {
-			router.push(PUBLIC_URL.auth('/login'))
-			return
-		}
-
-		const prevIsLiked = isLikedLocal
-		const prevLikeCount = likeCountLocal
-
-		setIsLiked(!isLikedLocal)
-		setLikeCount(prev => (isLikedLocal ? prev - 1 : prev + 1))
-
-		try {
-			await toggleLike(track.id)
-		} catch (error) {
-			setIsLiked(prevIsLiked)
-			setLikeCount(prevLikeCount)
+			toast.error('Для отметки понравившегося маршрута требуется войти в аккаунт или зарегистрироваться', {
+				duration: 3000
+			})
+		} else {
+			toggleLike(track.id)
 		}
 	}
 
 	const handleFavClick = () => {
 		if (!user) {
-			router.push(PUBLIC_URL.auth('/login'))
-			return
+			toast.error('Для отметки понравившегося маршрута требуется войти в аккаунт или зарегистрироваться', {
+				duration: 3000
+			})
+		} else {
+			toggleFavorite(track.id)
+			setInFav(!inFav)
 		}
-
-		toggleFavorite(track.id)
-		setInFav(!inFav)
 	}
 
 	return (
@@ -123,12 +111,12 @@ export function TrackContent({ track }: TrackContentProps) {
 							<div className='d-flex gap-3 flex-wrap my-4'>
 								<button
 									id='postLikeBtn'
-									className={`btn-outline-green btn-like ${style.track_content_btn} ${isLikedLocal ? 'liked' : ''}`}
+									className={`btn-outline-green btn-like ${style.track_content_btn} ${user?.likes.includes(track.id) ? 'liked' : ''}`}
 									onClick={hadleLikeClick}
-									disabled={isLoadingToggleLike || isLikeLoading}
+									disabled={isLoadingToggleLike}
 								>
 									<i className='fa-regular fa-heart'></i>
-									Нравится: <span id='postLikeCount'>{likeCountLocal}</span>
+									Нравится: <span id='postLikeCount'>{likeCount}</span>
 								</button>
 								<button
 									id='postFavBtn'
