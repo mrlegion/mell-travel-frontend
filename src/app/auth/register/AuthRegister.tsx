@@ -25,7 +25,8 @@ export function AuthRegister() {
 		defaultValues: {
 			name: '',
 			password: '',
-			email: ''
+			email: '',
+			license: false
 		}
 	})
 
@@ -44,7 +45,7 @@ export function AuthRegister() {
 		}
 	})
 
-	const onSubmit = (data: IAuthForm) => {
+	const onSubmit = (data: IAuthForm & { license: boolean }) => {
 		mutation.mutate(data)
 	}
 
@@ -74,6 +75,11 @@ export function AuthRegister() {
 							className='form-control-mell'
 							placeholder='Как вас зовут?'
 						/>
+						{errors.name && (
+							<div className='error-message' style={{ color: 'red', fontSize: '14px' }}>
+								{errors.name.message}
+							</div>
+						)}
 					</div>
 					<div className='mb-3'>
 						<label className='form-label'>Email</label>
@@ -85,6 +91,11 @@ export function AuthRegister() {
 							className='form-control-mell'
 							placeholder='email@example.ru'
 						/>
+						{errors.email && (
+							<div className='error-message' style={{ color: 'red', fontSize: '14px' }}>
+								{errors.email.message}
+							</div>
+						)}
 					</div>
 					<div className='mb-3'>
 						<label className='form-label'>Пароль</label>
@@ -104,7 +115,37 @@ export function AuthRegister() {
 							className='form-control-mell'
 							placeholder='••••••'
 						/>
+						{errors.password && (
+							<div className='error-message' style={{ color: 'red', fontSize: '14px' }}>
+								{errors.password.message}
+							</div>
+						)}
 					</div>
+
+					<div className='mb-3'>
+						<div className='form-check'>
+							<input
+								{...register('license', {
+									required: 'Необходимо согласие с политикой конфиденциальности'
+								})}
+								type='checkbox'
+								className='form-check-input'
+								id='privacyPolicy'
+							/>
+							<label className='form-check-label' htmlFor='privacyPolicy'>
+								Я ознакомлен(а) и согласен(на) с{' '}
+								<Link href={PUBLIC_URL.privacy()} target='_blank' className='link-primary'>
+									политикой конфиденциальности
+								</Link>
+							</label>
+						</div>
+						{errors.license && (
+							<div className='error-message' style={{ color: 'red', fontSize: '14px' }}>
+								{errors.license.message}
+							</div>
+						)}
+					</div>
+
 					<button
 						type='submit'
 						className='btn-primary-green w-100 justify-content-center'

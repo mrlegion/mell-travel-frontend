@@ -15,5 +15,6 @@ export const PUBLIC_URL = {
 	rules: () => PUBLIC_URL.root('/rules'),
 	contacts: () => PUBLIC_URL.root('/contacts'),
 	profile: () => PUBLIC_URL.root(`/profile`),
-	user: (id = '') => PUBLIC_URL.root(`/profile/${id}`)
+	user: (id = '') => PUBLIC_URL.root(`/profile/${id}`),
+	privacy: () => PUBLIC_URL.root('/privacy')
 }
